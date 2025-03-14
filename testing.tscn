@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkpwpkeexa52u"]
+
+[ext_resource type="Script" uid="uid://bca08vr7kmanw" path="res://testing.gd" id="1_co24e"]
+[ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot-main/wheel.tscn" id="1_qrja6"]
+
+[node name="Testing" type="Node2D"]
+script = ExtResource("1_co24e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Wheel" parent="." instance=ExtResource("1_qrja6")]
+offset_left = -148.0
+offset_top = -151.0
+offset_right = 152.0
+offset_bottom = 149.0
