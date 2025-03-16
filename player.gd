@@ -1,5 +1,7 @@
 extends Camera3D
 
+@onready var ray_cast : RayCast3D = $RayCast3D
+
 @export var wheel : Wheel
 
 @export var mouse_sensitivity_x = 0.3 #Mouse sensitivity X axis
@@ -36,6 +38,18 @@ func _input(event):
 		self.rotation_degrees.x = clamp(self.rotation_degrees.x + -event.relative.y * mouse_sensitivity_y, mouse_max_down, mouse_max_up)
 
 func new_dir_chosen(wp:Wheel.WheelPayload):
+	match wp.base_value:
+		1: # Shoot
+			if ray_cast.is_colliding():
+				var collider = ray_cast.get_collider()
+				if collider is Enemy:
+					collider.damage(wp.slice_value)
+		2: # Bomb
+			pass
+		3:
+			pass
+		4:
+			pass
 	print("-----")
 	print("Base Val: ", wp.base_value)
 	print("Slice Val: ", wp.slice_value)

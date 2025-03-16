@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7r2vk53dptag"]
+[gd_scene load_steps=6 format=3 uid="uid://7r2vk53dptag"]
 
 [ext_resource type="Script" uid="uid://cbcbsn5ij76o0" path="res://enemy.gd" id="1_7k104"]
 
@@ -9,6 +9,9 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_7xaro")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7k104"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("nav")]
 script = ExtResource("1_7k104")
@@ -21,3 +24,32 @@ mesh = SubResource("CapsuleMesh_7k104")
 shape = SubResource("CapsuleShape3D_4gyqm")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+texture = SubResource("ViewportTexture_7k104")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 30)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewportContainer/SubViewport/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 30.0
+max_value = 4.0
+step = 1.0
+value = 1.0
+show_percentage = false

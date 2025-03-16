@@ -90,7 +90,7 @@ enum TweenType {
 #endregion
 
 #region Internal Variables
-var base_numbers:Array[int] = [-2,-1,1,2] ## base score values for the slices
+var base_numbers:Array[int] = [1,2,3,4] ## base score values for the slices
 var slice_values:Array[int] = [1,2,3,4] ## slice value multiplier
 var current_value_mappings:Array[int] = [0,90,180,270] ## assigns values to directions; format is as follows: [UP,RIGHT,DOWN,LEFT]
 enum WheelState {AWAITING_SELECTION,ROTATING,NO_INPUT} ## enum dictating current state of wheel.
@@ -171,7 +171,7 @@ func rotate_slices()->void:
 ## this function resets the minigame.
 func reset()->void:
 	randomize() # ensures that godot will randomize the shuffle of the mappings
-	selector.rotation_degrees = 0 # remove this if you don't want the selector to reset up every time
+	#selector.rotation_degrees = 0 # remove this if you don't want the selector to reset up every time
 	slice_gimbal.rotation_degrees = 0 
 	num_selections = 0 
 	for x:Control in covers: x.visible = false # hides the covers
@@ -182,8 +182,8 @@ func reset()->void:
 			slices[j].rotation_degrees = current_value_mappings[j]  # sets the slice rotations to our value mappings
 			if DIRECTIONS[x] == current_value_mappings[j]:
 				slice_values[x] = x+1
-
-	base_numbers.shuffle() # shuffles base numbers so random wheel segments = a random base number
+	#current_value_mappings = [0, 90, 180, 270]
+	#base_numbers.shuffle() # shuffles base numbers so random wheel segments = a random base number
 	_current_value = get_current_wheel_value() 
 	_state = WheelState.AWAITING_SELECTION 
 
@@ -200,7 +200,7 @@ func get_current_wheel_value()->WheelPayload:
 	var wp:WheelPayload = WheelPayload.new()
 	for x:int in current_value_mappings.size():
 		if current_direction == current_value_mappings[x]:
-			wp.base_value = base_numbers[x]
+			wp.base_value = (current_direction / 90) + 1 #base_values[x]
 			wp.slice_value = slice_values[x]
 			wp.total_value = wp.base_value * wp.slice_value
 	return wp
