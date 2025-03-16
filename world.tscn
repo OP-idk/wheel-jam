@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkpwpkeexa52u"]
+[gd_scene load_steps=13 format=3 uid="uid://bkpwpkeexa52u"]
 
-[ext_resource type="Script" uid="uid://bca08vr7kmanw" path="res://world.gd" id="1_co24e"]
-[ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot-main/wheel.tscn" id="1_qrja6"]
-[ext_resource type="Script" uid="uid://bwrtovxck7i4t" path="res://player.gd" id="3_feb8i"]
-[ext_resource type="Texture2D" uid="uid://dmxmbyuhhejlj" path="res://icon.svg" id="4_kj3p2"]
+[ext_resource type="Script" uid="uid://bca08vr7kmanw" path="res://world.gd" id="1_036b0"]
+[ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot-main/wheel.tscn" id="2_dwbse"]
+[ext_resource type="Script" uid="uid://bwrtovxck7i4t" path="res://player.gd" id="3_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://dmxmbyuhhejlj" path="res://icon.svg" id="4_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://7r2vk53dptag" path="res://enemy.tscn" id="5_ioo17"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_co24e"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,6 +19,10 @@ sky = SubResource("Sky_feb8i")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_jn4p2"]
+vertices = PackedVector3Array(-16.5, 0.5, -17.5, -16.5, 0.5, 17.5, 16.5, 0.5, 17.5, 16.5, 0.5, -17.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lc7k4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_feb8i"]
@@ -27,7 +32,7 @@ size = Vector3(1, 1, 2)
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_co24e")
+script = ExtResource("1_036b0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kj3p2")
@@ -35,6 +40,15 @@ environment = SubResource("Environment_kj3p2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_jn4p2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(34, 1, 36)
+material = SubResource("StandardMaterial3D_lc7k4")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -46,7 +60,7 @@ handle_input_locally = false
 size = Vector2i(300, 300)
 render_target_update_mode = 4
 
-[node name="Wheel" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_qrja6")]
+[node name="Wheel" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_dwbse")]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 300.0
 offset_bottom = 300.0
@@ -81,15 +95,9 @@ offset_right = 174.0
 offset_bottom = 301.0
 text = "Shoot"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-use_collision = true
-size = Vector3(34, 1, 36)
-material = SubResource("StandardMaterial3D_lc7k4")
-
 [node name="Player" type="Camera3D" parent="." node_paths=PackedStringArray("wheel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 11.4)
-script = ExtResource("3_feb8i")
+script = ExtResource("3_pkg7o")
 wheel = NodePath("../SubViewportContainer/SubViewport/Wheel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
@@ -99,6 +107,9 @@ mesh = SubResource("BoxMesh_feb8i")
 [node name="Sprite3D" type="Sprite3D" parent="Player/MeshInstance3D"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 1.01)
 texture = SubResource("ViewportTexture_kj3p2")
+
+[node name="RayCast3D" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, 0, -100)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -121,4 +132,7 @@ layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/CenterContainer/Control"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_kj3p2")
+texture = ExtResource("4_gbfbk")
+
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("5_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, -12.9)
