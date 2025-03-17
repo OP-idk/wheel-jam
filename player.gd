@@ -9,6 +9,8 @@ extends Camera3D
 @export var mouse_max_up = 90 #Mouse max look angle up
 @export var mouse_max_down = -80 #Mouse max look angle down
 @export var mouse_captured = true
+
+var bomb := preload("res://bomb.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if mouse_captured:
@@ -45,7 +47,15 @@ func new_dir_chosen(wp:Wheel.WheelPayload):
 				if collider is Enemy:
 					collider.damage(wp.slice_value)
 		2: # Bomb
-			pass
+			var new_bomb : Bomb = bomb.instantiate()
+			new_bomb.transform.origin = transform.origin
+			new_bomb.transform.origin.z -= 1
+			# This is hackey as shit but it might work
+			new_bomb.linear_velocity = ($MeshInstance3D.global_position - global_position).normalized()
+			new_bomb.linear_velocity.y *= -.5
+			
+			new_bomb.aoe_size = wp.slice_value
+			get_parent().add_child(new_bomb)
 		3:
 			pass
 		4:

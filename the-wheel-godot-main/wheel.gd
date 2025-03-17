@@ -200,7 +200,7 @@ func get_current_wheel_value()->WheelPayload:
 	var wp:WheelPayload = WheelPayload.new()
 	for x:int in current_value_mappings.size():
 		if current_direction == current_value_mappings[x]:
-			wp.base_value = (current_direction / 90) + 1 #base_values[x]
+			wp.base_value = int(float(current_direction) / 90) + 1 #base_values[x]
 			wp.slice_value = slice_values[x]
 			wp.total_value = wp.base_value * wp.slice_value
 	return wp
