@@ -11,7 +11,7 @@ material = SubResource("StandardMaterial3D_4fn8o")
 [sub_resource type="SphereShape3D" id="SphereShape3D_6w74q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bwkwj"]
-radius = 5.0
+radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_573fp"]
 radius = 0.3

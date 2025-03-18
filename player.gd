@@ -1,3 +1,4 @@
+class_name Player
 extends Camera3D
 
 @onready var ray_cast : RayCast3D = $RayCast3D

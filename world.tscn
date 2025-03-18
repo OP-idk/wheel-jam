@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkpwpkeexa52u"]
+[gd_scene load_steps=13 format=3 uid="uid://bkpwpkeexa52u"]
 
 [ext_resource type="Script" uid="uid://bca08vr7kmanw" path="res://world.gd" id="1_036b0"]
 [ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot-main/wheel.tscn" id="2_dwbse"]
 [ext_resource type="Script" uid="uid://bwrtovxck7i4t" path="res://player.gd" id="3_pkg7o"]
 [ext_resource type="Texture2D" uid="uid://dmxmbyuhhejlj" path="res://icon.svg" id="4_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://7r2vk53dptag" path="res://enemy.tscn" id="5_ioo17"]
+[ext_resource type="PackedScene" uid="uid://c31c0bgwvufw3" path="res://explosion.tscn" id="6_dwbse"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_co24e"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -29,8 +30,9 @@ bottom_radius = 0.3
 [sub_resource type="ViewportTexture" id="ViewportTexture_kj3p2"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_036b0")
+player = NodePath("Player")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -119,7 +121,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "Bomb"
 
-[node name="Label3" type="Label" parent="SubViewportContainer/SubViewport"]
+[node name="LabelHeal" type="Label" parent="SubViewportContainer/SubViewport"]
+offset_left = 129.0
+offset_top = 278.0
+offset_right = 174.0
+offset_bottom = 301.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Heal"
+
+[node name="LabelJam" type="Label" parent="SubViewportContainer/SubViewport"]
 offset_left = -0.999999
 offset_top = 166.0
 offset_right = 44.0
@@ -127,16 +138,7 @@ offset_bottom = 189.0
 rotation = -1.57132
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-text = "Shoot"
-
-[node name="Label4" type="Label" parent="SubViewportContainer/SubViewport"]
-offset_left = 129.0
-offset_top = 278.0
-offset_right = 174.0
-offset_bottom = 301.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-text = "Shoot"
+text = "Jam"
 
 [node name="Player" type="Camera3D" parent="." node_paths=PackedStringArray("wheel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10.4)
@@ -167,3 +169,6 @@ collision_layer = 1
 [node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("5_ioo17")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.7, -12.9)
 collision_layer = 1
+
+[node name="Explosion" parent="." instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7, 2.4, 6.3)
