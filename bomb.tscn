@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr3qnkxkq6nfs"]
+
+[ext_resource type="Script" uid="uid://b56wtrd51ibii" path="res://bomb.gd" id="1_573fp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fn8o"]
+albedo_color = Color(0.920278, 0.549444, 2.69532e-06, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nfxiy"]
+material = SubResource("StandardMaterial3D_4fn8o")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6w74q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bwkwj"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_573fp"]
+radius = 0.3
+
+[node name="Bomb" type="RigidBody3D"]
+collision_mask = 3
+lock_rotation = true
+script = ExtResource("1_573fp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_nfxiy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6w74q")
+
+[node name="ExplosionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea"]
+shape = SubResource("SphereShape3D_bwkwj")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+shape = SubResource("SphereShape3D_573fp")
+
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]
+[connection signal="body_exited" from="ExplosionArea" to="." method="_on_explosion_area_body_exited"]
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
