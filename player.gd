@@ -48,7 +48,7 @@ func new_dir_chosen(wp:Wheel.WheelPayload):
 					collider.damage(wp.slice_value)
 		2: # Bomb
 			var new_bomb : Bomb = bomb.instantiate()
-			new_bomb.global_position = $BombSpawn.global_position
+			new_bomb.position = $BombSpawn.global_position
 			# This is hackey as shit but it might work
 			new_bomb.linear_velocity = ($BombSpawn.global_position - $MeshInstance3D.global_position).normalized()
 			
