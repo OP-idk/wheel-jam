@@ -34,7 +34,7 @@ func _on_explosion_area_body_exited(body: Node3D) -> void:
 
 func _on_trigger_area_body_entered(body: Node3D) -> void:
 	for enemy in enemyList:
-		enemy.damage(1)
+		enemy.damage(2)
 	var new_explosion : Explosion = explosion.instantiate()
 	new_explosion.position = global_position
 	new_explosion.scale = Vector3(1, 1, 1) * 4 * aoe_size

@@ -15,6 +15,8 @@
 
 ## Love, Shane Scott & Colin McInerney.
 
+var jammed = false
+
 #region Signals
 signal new_dir_selected() ## emitted when a new direction is selected.
 signal new_dir_chosen(payload:WheelPayload) ## emitted when a direction is chosen
@@ -103,6 +105,13 @@ var target_selections:int = 4 ## how many selections are allowed; default is 4.
 #endregion
 
 #region Built-In Functions
+
+func _process(delta: float) -> void:
+	if jammed:
+		%JamBar.get_parent().visible = true
+		%JamBar.value = %JamTimer.time_left
+	else: %JamBar.get_parent().visible = false
+
 #called when the scene is loaded into the tree
 func _ready()->void:
 	reset() # all the setup is contained in reset
@@ -110,6 +119,7 @@ func _ready()->void:
 
 # handles input for our minigame
 func _unhandled_input(_event: InputEvent) -> void:
+	if jammed: return
 	if _state != WheelState.AWAITING_SELECTION: return
 
 	if Input.is_action_just_pressed("ui_accept"): # ui_accept is spacebar
@@ -251,3 +261,8 @@ class WheelPayload:
 	var slice_value:int
 	var total_value:int
 #endregion
+
+
+func _on_jam_timer_timeout() -> void:
+	jammed = false
+	pass # Replace with function body.

@@ -6,7 +6,6 @@ extends CharacterBody3D
 @export var nav : NavigationAgent3D
 
 var health : int = 4
-var alive = true
 
 func _ready():
 	%ProgressBar.value = health
@@ -21,8 +20,7 @@ func _physics_process(delta: float) -> void:
 	var current_location = global_transform.origin
 	var new_velocity = (next_location - current_location).normalized() * speed
 	
-	if alive: velocity = velocity.move_toward(new_velocity, accel_weight)
-	else: velocity = velocity.move_toward(Vector3.ZERO, accel_weight / 100)
+	velocity = velocity.move_toward(new_velocity, accel_weight)
 	move_and_slide()
 
 func set_target_position(target : Vector3) -> void:
@@ -32,10 +30,8 @@ func damage(dmg : int) -> void:
 	health -= dmg
 	%ProgressBar.value = health
 	if health <= 0:
+		Global.score += 1
 		die()
 
 func die():
-	alive = false
-	$MeshInstance3D.mesh.material.albedo_color = "#e700bc"
-	await get_tree().create_timer(.25).timeout
 	queue_free()

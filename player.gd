@@ -11,6 +11,8 @@ extends Camera3D
 @export var mouse_max_down = -80 #Mouse max look angle down
 @export var mouse_captured = true
 
+var health = 5
+
 var bomb := preload("res://bomb.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,9 +29,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if mouse_captured:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		get_tree().paused = false
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	pass
+		get_tree().paused = true
+	$CanvasLayer/Health.value = health
+	$CanvasLayer/Score.text = "Score: " + str(Global.score) + "\nHigh Score: " + str(Global.high_score)
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -56,11 +61,20 @@ func new_dir_chosen(wp:Wheel.WheelPayload):
 			new_bomb.aoe_size = wp.slice_value
 			get_parent().add_child(new_bomb)
 		3:
-			pass
+			health = min(health + wp.slice_value, 5)
 		4:
-			pass
-	print("-----")
-	print("Base Val: ", wp.base_value)
-	print("Slice Val: ", wp.slice_value)
-	print("Total Val: ", wp.total_value)
+			wheel.jammed = true
+			%JamTimer.start(wp.slice_value)
+			%JamBar.max_value = wp.slice_value
 	pass
+
+
+func _on_hurt_area_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		body.die()
+	health -= 1
+	if health <= 0:
+		Global.score = 0
+		get_tree().reload_current_scene()
+	
+	pass # Replace with function body.

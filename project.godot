@@ -14,6 +14,10 @@ config/name="Wheel Jam"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [debug]
 
 gdscript/warnings/unused_parameter=0
