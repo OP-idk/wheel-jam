@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bkpwpkeexa52u"]
+[gd_scene load_steps=12 format=3 uid="uid://bkpwpkeexa52u"]
 
 [ext_resource type="Script" uid="uid://bca08vr7kmanw" path="res://world.gd" id="1_036b0"]
 [ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot-main/wheel.tscn" id="2_dwbse"]
 [ext_resource type="Script" uid="uid://bwrtovxck7i4t" path="res://player.gd" id="3_pkg7o"]
 [ext_resource type="Texture2D" uid="uid://dmxmbyuhhejlj" path="res://icon.svg" id="4_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://7r2vk53dptag" path="res://enemy.tscn" id="5_ioo17"]
-[ext_resource type="PackedScene" uid="uid://c31c0bgwvufw3" path="res://explosion.tscn" id="6_dwbse"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_co24e"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -21,8 +20,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jn4p2"]
-vertices = PackedVector3Array(-1.9, 0.5, -1, -1.9, 0.5, -4, -4.15, 0.5, -4.25, -16.65, 0.5, -1, -4.15, 0.5, -6, -2.4, 0.5, -6.25, -2.65, 0.5, -17.5, -16.65, 0.5, -17.5, 16.6, 0.5, -6.25, 16.6, 0.5, -17.5, 5.6, 0.5, 1, 3.35, 0.5, 1.25, 3.35, 0.5, 4.75, 7.35, 0.5, 4.75, 7.6, 0.5, 7, 16.6, 0.5, 7, 5.35, 0.5, -1, 16.6, 0.5, -4, -7.4, 0.5, 5, -5.15, 0.5, 4.75, -5.15, 0.5, 1.25, -16.65, 0.5, 1.25, -16.65, 0.5, 17.5, -7.4, 0.5, 17.5, 7.6, 0.5, 17.5, 16.6, 0.5, 17.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 3), PackedInt32Array(4, 2, 3), PackedInt32Array(8, 5, 9), PackedInt32Array(9, 5, 6), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(15, 14, 13), PackedInt32Array(10, 16, 13), PackedInt32Array(13, 16, 15), PackedInt32Array(15, 16, 17), PackedInt32Array(0, 1, 16), PackedInt32Array(16, 1, 17), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(23, 22, 18), PackedInt32Array(18, 22, 21), PackedInt32Array(20, 11, 19), PackedInt32Array(19, 11, 12), PackedInt32Array(25, 24, 15), PackedInt32Array(15, 24, 14)]
+vertices = PackedVector3Array(-16.65, 0.5, -11, -11.65, 0.5, -11, -11.4, 0.5, -12, -9.4, 0.5, -12, -9.4, 0.5, -17.5, -16.65, 0.5, -17.5, 10.1, 0.5, -12, 10.1, 0.5, -17.5, 12.1, 0.5, -12, 12.35, 0.5, -11, 16.6, 0.5, -11, 16.6, 0.5, -17.5, -10.15, 0.5, -5, -9.9, 0.5, -9.75, -11.4, 0.5, -9.75, -16.65, 0.5, -5, 12.1, 0.5, -9.75, 10.6, 0.5, -9.75, 10.85, 0.5, -5, 16.6, 0.5, -5, -4.15, 0.5, -5, -3.9, 0.5, -9.75, -2.65, 0.5, -5, -2.4, 0.5, -4, 1.6, 0.5, -4, 1.85, 0.5, -5, 3.1, 0.5, -9.75, 3.35, 0.5, -5, 1.6, 0.5, -3.25, -2.65, 0.5, -2.75, 1.35, 0.5, 1.5, -3.9, 0.5, 1.5, -4.15, 0.5, -2.75, 12.85, 0.5, 1.5, 13.1, 0.5, 2, 16.6, 0.5, 2, 16.6, 0.5, -2.75, 1.85, 0.5, -2.75, -16.65, 0.5, 3, -12.4, 0.5, 3.25, -12.4, 0.5, 1.75, -10.65, 0.5, 1.5, -10.9, 0.5, -2.75, -16.65, 0.5, -2.75, 12.85, 0.5, 3.75, 16.6, 0.5, 6.25, 3.85, 0.5, 6.25, 3.85, 0.5, 3.75, -12.15, 0.5, 3.75, -16.65, 0.5, 6.25, -4.65, 0.5, 6.25, -4.65, 0.5, 3.75, 1.85, 0.5, 6.25, -2.65, 0.5, 6.25, -2.4, 0.5, 8, 1.6, 0.5, 8, 1.85, 0.5, 8.5, -2.65, 0.5, 8.5, -4.65, 0.5, 17.5, 3.85, 0.5, 17.5, -4.65, 0.5, 8.5, 3.85, 0.5, 8.5, -16.65, 0.5, 8.5, -16.65, 0.5, 17.5, 16.6, 0.5, 17.5, 16.6, 0.5, 8.5)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 2), PackedInt32Array(0, 5, 2), PackedInt32Array(2, 5, 4), PackedInt32Array(4, 7, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 6, 7), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(14, 13, 12), PackedInt32Array(0, 1, 14), PackedInt32Array(0, 14, 15), PackedInt32Array(15, 14, 12), PackedInt32Array(10, 16, 9), PackedInt32Array(18, 17, 16), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 10), PackedInt32Array(12, 13, 20), PackedInt32Array(20, 13, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(22, 21, 25), PackedInt32Array(25, 21, 26), PackedInt32Array(26, 27, 25), PackedInt32Array(22, 20, 21), PackedInt32Array(26, 17, 27), PackedInt32Array(27, 17, 18), PackedInt32Array(24, 28, 23), PackedInt32Array(23, 28, 29), PackedInt32Array(28, 30, 29), PackedInt32Array(29, 30, 31), PackedInt32Array(31, 32, 29), PackedInt32Array(34, 33, 35), PackedInt32Array(35, 33, 36), PackedInt32Array(30, 28, 37), PackedInt32Array(30, 37, 33), PackedInt32Array(33, 37, 36), PackedInt32Array(40, 39, 38), PackedInt32Array(42, 41, 40), PackedInt32Array(38, 43, 40), PackedInt32Array(40, 43, 42), PackedInt32Array(42, 32, 41), PackedInt32Array(41, 32, 31), PackedInt32Array(34, 35, 44), PackedInt32Array(44, 35, 45), PackedInt32Array(47, 44, 46), PackedInt32Array(46, 44, 45), PackedInt32Array(39, 48, 38), PackedInt32Array(38, 48, 49), PackedInt32Array(51, 50, 48), PackedInt32Array(48, 50, 49), PackedInt32Array(47, 46, 52), PackedInt32Array(53, 50, 51), PackedInt32Array(54, 53, 55), PackedInt32Array(55, 53, 52), PackedInt32Array(53, 51, 52), PackedInt32Array(52, 51, 47), PackedInt32Array(55, 56, 54), PackedInt32Array(54, 56, 57), PackedInt32Array(57, 56, 59), PackedInt32Array(57, 59, 58), PackedInt32Array(58, 60, 57), PackedInt32Array(56, 61, 59), PackedInt32Array(63, 62, 58), PackedInt32Array(58, 62, 60), PackedInt32Array(61, 65, 59), PackedInt32Array(59, 65, 64)]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_036b0"]
 bottom_radius = 0.3
@@ -33,6 +32,10 @@ viewport_path = NodePath("SubViewportContainer/SubViewport")
 [node name="World" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_036b0")
 player = NodePath("Player")
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -73,18 +76,29 @@ use_collision = true
 collision_layer = 3
 size = Vector3(34, 1, 36)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 12.55)
-operation = 2
-size = Vector3(14.3, 5.7, 14.6)
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.05, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.25, 2.7)
 size = Vector3(24.2, 0.6, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 0.25, -5.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.25, -10.8)
 size = Vector3(22.6, 0.6, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6, 0.25, 7.3)
+size = Vector3(15.1, 0.6, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 0.25, 7.3)
+size = Vector3(15.1, 0.6, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6, 0.25, -3.9)
+size = Vector3(15.1, 0.6, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7, 0.25, -3.9)
+size = Vector3(15.1, 0.6, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -141,7 +155,7 @@ theme_override_constants/outline_size = 10
 text = "Jam"
 
 [node name="Player" type="Camera3D" parent="." node_paths=PackedStringArray("wheel")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 13.8)
 script = ExtResource("3_pkg7o")
 wheel = NodePath("../SubViewportContainer/SubViewport/Wheel")
 
@@ -170,5 +184,4 @@ collision_layer = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.7, -12.9)
 collision_layer = 1
 
-[node name="Explosion" parent="." instance=ExtResource("6_dwbse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7, 2.4, 6.3)
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
