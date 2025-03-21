@@ -27,9 +27,10 @@ func _on_explosion_area_body_entered(body: Node3D) -> void:
 
 
 func _on_explosion_area_body_exited(body: Node3D) -> void:
-	for i in range(enemyList.size() - 1, 0, -1):
+	for i in range(enemyList.size()):
 		if enemyList[i] == body:
 			enemyList.remove_at(i)
+			break
 	pass # Replace with function body.
 
 func _on_trigger_area_body_entered(body: Node3D) -> void:

@@ -159,11 +159,13 @@ theme_override_constants/outline_size = 10
 text = "Jam"
 
 [node name="ThisButtonIsJustForAesthetics" type="Button" parent="SubViewportContainer/SubViewport"]
+visible = false
 offset_right = 305.0
 offset_bottom = 305.0
 
 [node name="JamBar" type="ProgressBar" parent="SubViewportContainer/SubViewport/ThisButtonIsJustForAesthetics"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 43.0
 offset_top = 138.0
 offset_right = 260.0
